@@ -1,0 +1,86 @@
+<ng-container *ngrxLet="{
+        steps: steps$, currentStepIndex: currentStepIndex$,
+        selectedPlan: selectedPlan$, planDuration: planDuration$} as vm">
+
+    <!-- Steps Navigation Links -->
+    <form-steps-list [steps]="vm.steps" [currentStepIndex]="vm.currentStepIndex"
+        (stepChange)="handleStepChange($event)"></form-steps-list>
+
+    <!-- Main Form -->
+    <form [formGroup]="form" [@change]="vm.currentStepIndex">
+
+        @switch (vm.currentStepIndex) {
+        @case (0) {
+        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Personal info">
+            <ng-container ngProjectAs="[description]">
+                Please provide your name, email address, and phone number.
+            </ng-container>
+            <ng-container ngProjectAs="[content]" formGroupName="personalInfo">
+                <form-textbox label="Name" name="name" autoComplete="given-name" placeholder="e.g. Stephen King"
+                    [defaultFocus]="true"></form-textbox>
+                <form-textbox label="Email" type="email" name="email" autoComplete="email"
+                    placeholder="e.g. stephenking@lorem.com"></form-textbox>
+                <form-textbox label="Phone Number" type="tel" name="phoneNumber" autoComplete="tel"
+                    placeholder="e.g. 1 234 567 890"></form-textbox>
+            </ng-container>
+        </form-step>
+        }
+        @case (1) {
+        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Select your plan">
+            <ng-container ngProjectAs="[description]">
+                You have the option of monthly or yearly billing.
+            </ng-container>
+            <ng-container ngProjectAs="[content]" formGroupName="selectedPlan">
+                <form-plans [duration]="vm.planDuration"></form-plans>
+                <form-duration-switch [planDuration]="vm.planDuration"
+                    (durationChange)="togglePlanDuration($event)"></form-duration-switch>
+            </ng-container>
+        </form-step>
+        }
+        @case (2) {
+        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Pick add-ons">
+            <ng-container ngProjectAs="[description]">
+                Add-ons help enhance your gaming experience
+            </ng-container>
+            <ng-container ngProjectAs="[content]">
+                <form-add-ons [selectedPlan]="vm.selectedPlan" [duration]="vm.planDuration"
+                    formControlName="includedAddOns"></form-add-ons>
+            </ng-container>
+        </form-step>
+        }
+        @case (3) {
+        <form-step [group]="false" [stepName]="vm.steps[vm.currentStepIndex].name" heading="Finishing up">
+            <ng-container ngProjectAs="[description]">
+                Double-check everything looks OK before confirming.
+            </ng-container>
+            <ng-container ngProjectAs="[content]">
+                <form-summary></form-summary>
+            </ng-container>
+        </form-step>
+        }
+        @case (-1) {
+        <section class="confirmation-msg">
+            <div class="confirmation-msg__icon">
+                <img src="./../../../../assets/images/icon-thank-you.svg" alt="">
+            </div>
+            <h2 class="confirmation-msg__title">
+                Thank you!
+            </h2>
+            <p class="confirmation-msg__txt">
+                Thanks for confirming your subscription! We hope you have fun
+                using our platform. If you ever need support, please feel free
+                to email us at {{'support@loremgaming.com'}}
+            </p>
+        </section>
+        }
+        }
+
+
+    </form>
+
+    <!-- Links At The Bottom -->
+    @if (vm.currentStepIndex !== -1) {
+    <form-lower-controls [steps]="vm.steps" [currentStepIndex]="vm.currentStepIndex"
+        (stepChange)="handleStepChange($event)"></form-lower-controls>
+    }
+</ng-container>

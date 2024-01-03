@@ -1,0 +1,46 @@
+@use "abstracts" as *;
+
+.plans {
+  --gridSpacer: var(--spacer-400);
+  @include gridSpacer();
+  margin-bottom: var(--spacer-500);
+
+  @include min-mq($layoutSwitchBp) {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--gridSpacer);
+  }
+
+  .label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacer-500);
+    padding: var(--spacer-500);
+    cursor: pointer;
+
+    @include min-mq($layoutSwitchBp) {
+      grid-template-columns: none;
+      gap: var(--spacer-700);
+    }
+
+    &__media {
+      justify-self: flex-start;
+      height: 50px;
+    }
+
+    &__content {
+      span {
+        display: block;
+      }
+
+      span:last-child {
+        max-height: 100px;
+        transition-duration: 250ms;
+
+        &.js-hidden {
+          max-height: 0;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}

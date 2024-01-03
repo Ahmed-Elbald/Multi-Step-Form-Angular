@@ -1,0 +1,107 @@
+// SASS Variables
+
+$breakpoints: (
+  mobile: 576px,
+  tablet: 992px,
+  desktop: 1200px,
+);
+
+$border-radius: ();
+
+$textStyles: ("capitalize", "uppercase");
+
+$colors: (
+  pr: (
+    700: (
+      light: 213 96% 18%,
+    ),
+  ),
+  sec: (
+    500: (
+      light: 231 11% 63%,
+    ),
+  ),
+  acc: (
+    500: (
+      light: 243 100% 62%,
+    ),
+    400: (
+      light: 354 84% 57%,
+    ),
+  ),
+  neu: (
+    100: (
+      light: 0 0% 100%,
+    ),
+    200: (
+      light: 231 100% 99%,
+    ),
+    300: (
+      light: 217 100% 97%,
+    ),
+    400: (
+      light: 229 24% 87%,
+    ),
+    500: (
+      light: 206 94% 87%,
+    ),
+    600: (
+      light: 228 100% 84%,
+    ),
+  ),
+);
+
+$box-shadow: ();
+
+$fontFamilies: (
+  pr: "Ubuntu, sans-serif",
+);
+
+$fontWeights: (
+  bold: 700,
+  medium: 500,
+  regular: 400,
+);
+
+$sizes: (
+  "100": 0.025,
+  "200": 0.125,
+  "300": 0.25,
+  "400": 0.5,
+  "500": 1,
+  "600": 1.125,
+  "700": 1.25,
+  "800": 2.5,
+  "900": 3,
+  "1000": 4,
+  "1100": 5,
+  "1200": 6,
+  "1300": 8,
+);
+
+$font-sizes: (
+  "300": 0.875,
+  "400": 1,
+  "500": 1.125,
+  "600": 1.25,
+  "700": 1.75,
+  "800": 2,
+  "900": 3.5,
+  "1000": 6.25,
+  "1100": 9.375,
+);
+
+$zIndex: (
+  siteHeader: 2,
+  accessibilityLink: 3,
+  popup: 4,
+  errorMsg: 5,
+);
+
+$layoutSwitchBp: tablet;
+$smContainersWidth: calc(
+  map-get(
+      $map: $breakpoints,
+      $key: mobile,
+    ) + 50px
+);

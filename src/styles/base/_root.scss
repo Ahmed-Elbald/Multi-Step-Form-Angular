@@ -1,0 +1,89 @@
+@use "../abstracts" as *;
+
+/* Custom Properties */
+:root {
+  /* BreakPoints */
+  @each $breakpoint, $value in $breakpoints {
+    --bp-#{$breakpoint}: #{$value};
+  }
+
+  /* Border Radius */
+  @each $radius, $value in $border-radius {
+    --radius-#{$radius}: #{$value};
+  }
+
+  /* Colors */
+  @each $color, $colorVariants in $colors {
+    @each $colorVariant, $value in $colorVariants {
+      --clr-#{$color}-#{$colorVariant}: #{map-get($value, light)};
+    }
+  }
+
+  &[data-dark-theme="true"] {
+    @each $color, $colorVariants in $colors {
+      @each $colorVariant, $value in $colorVariants {
+        $darkColorValue: map-get($value, dark);
+
+        @if ($darkColorValue) {
+          --clr-#{$color}-#{$colorVariant}: #{$darkColorValue};
+        }
+      }
+    }
+  }
+
+  /* Box Shadow */
+  @each $shadow, $value in $box-shadow {
+    --shadow-#{$shadow}: #{$value};
+  }
+
+  /* Spacers */
+  @each $size, $value in $sizes {
+    --spacer-#{$size}: #{$value}#{em};
+  }
+
+  /* Font Families */
+  @each $fontFamily, $value in $fontFamilies {
+    --ff-#{$fontFamily}: #{$value};
+  }
+
+  /* Font Weights */
+  @each $fontWeight, $value in $fontWeights {
+    --fw-#{$fontWeight}: #{$value};
+  }
+
+  /* Font Sizes */
+  $mapLength: length($font-sizes);
+  $growthBase: 0.3vw;
+  $fontSizeUnit: rem;
+  @for $i from 1 through $mapLength {
+    $currentSize: nth(nth($font-sizes, $i), 1);
+
+    $currentSizeValue: nth(nth($font-sizes, $i), 2);
+    $lastSizeValue: null;
+    $nextSizeValue: null;
+    @if ($i == 1) {
+      $lastSizeValue: $currentSizeValue;
+    } @else {
+      $lastSizeValue: nth(nth($font-sizes, $i - 1), 2);
+    }
+    @if ($i == $mapLength) {
+      $nextSizeValue: $currentSizeValue;
+    } @else {
+      $nextSizeValue: nth(nth($font-sizes, $i + 1), 2);
+    }
+
+    $growth: $growthBase * (1 + (0.15 * $i));
+    @if ($lastSizeValue > 3.125) {
+      $lastSizeValue: 3;
+      $growth: $growth * 10;
+    }
+
+    --fs-#{$currentSize}: calc(
+      clamp(
+        #{$lastSizeValue}#{$fontSizeUnit},
+        calc(#{$lastSizeValue}#{$fontSizeUnit} + #{$growth}),
+        #{$nextSizeValue}#{$fontSizeUnit}
+      )
+    );
+  }
+}

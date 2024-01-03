@@ -1,0 +1,21 @@
+<fieldset class="radio-group">
+    <legend class="u-sr-only">
+        Plan duration
+    </legend>
+
+    <input class="u-sr-only" type="radio" name="duration" id="monthlyPlanOption" value="monthly"
+        formControlName="duration">
+    <label class="label" for="monthlyPlanOption" [class.js-current]="planDuration === 'monthly'">
+        monthly
+    </label>
+
+    <button class="duration-toggle-btn" type="button" aria-hidden="true" tabindex="-1"
+        [class.js-yearly-plan]="planDuration === 'yearly'" (click)="onDurationChange(planDuration)"></button>
+
+    <input class="u-sr-only" type="radio" name="duration" id="yearlyPlanOption" value="yearly"
+        formControlName="duration">
+    <label class="label" for="yearlyPlanOption" [class.js-current]="planDuration === 'yearly'">
+        yearly
+    </label>
+
+</fieldset>

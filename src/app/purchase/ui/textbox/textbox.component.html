@@ -1,0 +1,8 @@
+<div>
+    <label class="label" for="{{name}}Control">{{label}}</label>
+    <form-error-msg [controlName]="name" id="{{name}}ControlErrorMsg"></form-error-msg>
+</div>
+<input class="control" type="{{type}}" [name]="name" id="{{name}}Control" [attr.data-autoFocus]="defaultFocus"
+    [formControlName]="name" [placeholder]="placeholder" [autocomplete]="autoComplete ? autoComplete : 'off'"
+    [required]="isRequired" [attr.aria-invalid]="!control?.valid && control?.touched ? true : false"
+    [attr.aria-errormessage]="name + 'ControlErrorMsg'">

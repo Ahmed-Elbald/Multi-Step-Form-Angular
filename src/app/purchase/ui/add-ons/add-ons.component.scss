@@ -1,0 +1,60 @@
+@use "abstracts" as *;
+
+span {
+  display: block;
+}
+
+.add-ons {
+  --gridSpacer: var(--spacer-400);
+  @include gridSpacer();
+}
+
+.add-on {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-600);
+  padding: var(--spacer-500);
+
+  &__checkbox {
+    label {
+      position: relative;
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1px solid hsl(var(--clr-neu-400));
+      cursor: pointer;
+
+      &::before {
+        content: url(./../../../../assets/images/icon-checkmark.svg);
+        @include positionCentering();
+        opacity: 0;
+      }
+    }
+
+    &:has(input:checked) label {
+      background-color: hsl(var(--clr-acc-500));
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &:has(input:focus) label {
+      border-color: hsl(var(--clr-pr-700));
+    }
+  }
+
+  &__details {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr 1fr;
+
+    > div:last-child {
+      grid-column: 2;
+      grid-row: 1/-1;
+    }
+  }
+}

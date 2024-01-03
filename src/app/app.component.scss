@@ -1,0 +1,17 @@
+@use "abstracts" as *;
+
+main {
+  min-height: 100vh;
+  min-height: 100svh;
+  @include flexCentering();
+  padding-block: var(--spacer-1100);
+  background-color: hsl(var(--clr-neu-300));
+
+  @include max-mq($layoutSwitchBp) {
+    display: block;
+    padding-block: 0;
+    background-image: url("./../assets/images/bg-sidebar-mobile.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 200px;
+  }
+}

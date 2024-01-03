@@ -1,0 +1,115 @@
+@use "../abstracts" as *;
+
+/* Utility Calsses */
+// Padding
+@each $key, $value in $sizes {
+  .u-ps-#{$key} {
+    padding-inline-start: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-pe-#{$key} {
+    padding-inline-end: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-pt-#{$key} {
+    padding-block-start: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-pb-#{$key} {
+    padding-block-end: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-py-#{$key} {
+    padding-block: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-px-#{$key} {
+    padding-inline: var(unquote("--spacer-" + #{$key}));
+  }
+}
+// Margin
+@each $key, $value in $sizes {
+  .u-ms-#{$key} {
+    margin-inline-start: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-me-#{$key} {
+    margin-inline-end: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-mt-#{$key} {
+    margin-block-start: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-mb-#{$key} {
+    margin-block-end: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-my-#{$key} {
+    margin-block: var(unquote("--spacer-" + #{$key}));
+  }
+  .u-mx-#{$key} {
+    margin-inline: var(unquote("--spacer-" + #{$key}));
+  }
+}
+// Text
+.u-text-center {
+  @include textCenter();
+}
+
+@each $textStyle in $textStyles {
+  .u-text-#{$textStyle} {
+    text-transform: #{$textStyle};
+  }
+}
+
+// Border Radius
+@each $radius, $value in $border-radius {
+  .u-radius-#{$radius} {
+    border-radius: $value;
+  }
+}
+
+// Colors
+@each $color, $colorVariants in $colors {
+  @each $colorVariant, $value in $colorVariants {
+    .u-text-#{$color}-#{$colorVariant} {
+      color: hsl(
+        var(unquote($string: "--clr-" + #{$color} + "-" + #{$colorVariant}))
+      );
+    }
+
+    .u-bg-#{$color}-#{$colorVariant} {
+      background-color: hsl(
+        var(unquote($string: "--clr-" + #{$color} + "-" + #{$colorVariant}))
+      );
+    }
+  }
+}
+
+// Box Shadow
+@each $shadow, $value in $box-shadow {
+  .u-shadow-#{$shadow} {
+    box-shadow: unquote($string: $value);
+  }
+}
+
+// Fonts
+@each $fontFamily, $value in $fontFamilies {
+  .u-ff-#{$fontFamily} {
+    font-family: unquote($string: $value);
+  }
+}
+
+@each $fontWeight, $value in $fontWeights {
+  .u-fw-#{$fontWeight} {
+    font-weight: $value;
+  }
+}
+
+@each $size, $value in $sizes {
+  .u-fs-#{$size} {
+    font-size: var(unquote($string: "--fs-" + #{$size}));
+  }
+}
+
+// Screen Reader Only
+.u-sr-only {
+  @include screenReaderOnly();
+}
+
+// Center Switch
+.u-center-switch {
+  @include centerSwitch();
+}

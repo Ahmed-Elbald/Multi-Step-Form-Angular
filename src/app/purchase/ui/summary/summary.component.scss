@@ -1,0 +1,40 @@
+@use "abstracts" as *;
+
+dl {
+  --padding: var(--spacer-600);
+  position: relative;
+  padding: var(--padding);
+  border-radius: 10px;
+  background-color: hsl(var(--clr-neu-200));
+}
+
+.plan-name,
+.plan-price {
+  display: inline-block;
+}
+
+.plan-price {
+  float: right;
+}
+
+.add-ons {
+  --spacer: var(--spacer-500);
+  --gridSpacer: var(--spacer);
+  margin-top: var(--spacer);
+  padding-top: var(--spacer);
+  @include gridSpacer();
+  border-top: 1px solid hsl(var(--clr-neu-400));
+}
+
+.plan :is(dd, dt) {
+  display: inline-block;
+}
+
+.total {
+  position: absolute;
+  bottom: calc(-1 * var(--spacer-800));
+  left: 0;
+  width: 100%;
+  background-color: hsl(var(--clr-neu-100));
+  padding-inline: var(--padding);
+}

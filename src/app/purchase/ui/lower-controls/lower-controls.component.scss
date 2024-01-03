@@ -1,0 +1,49 @@
+@use "abstracts" as *;
+
+:host {
+  @include max-mq($layoutSwitchBp) {
+    display: block;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: var(--inlinePadding);
+    background-color: hsl(var(--clr-neu-100));
+    box-shadow: 0 0 10px 2px hsl(var(--clr-neu-400));
+  }
+}
+
+.wrapper {
+  max-width: var(--maxWidth);
+  margin-inline: auto;
+  @include flexBetween();
+}
+
+a {
+  text-transform: capitalize;
+}
+
+.previous-step-link:hover {
+  color: hsl(var(--clr-pr-700));
+}
+
+.next-step-link,
+.submit-btn {
+  border-radius: 10px;
+  padding-block: calc(var(--spacer-500) * 0.875);
+  padding-inline: var(--spacer-700);
+  color: hsl(var(--clr-neu-100));
+}
+
+.next-step-link {
+  background-color: hsl(var(--clr-pr-700));
+  outline-offset: -3px;
+}
+
+.next-step-link:hover {
+  filter: brightness(1.5);
+}
+
+.submit-btn {
+  background-color: hsl(var(--clr-acc-500));
+}

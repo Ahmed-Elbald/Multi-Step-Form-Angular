@@ -1,0 +1,81 @@
+@use "abstracts" as *;
+
+:host {
+  display: block;
+  margin-inline: auto;
+  padding-block: var(--spacer-800);
+
+  @include min-mq($layoutSwitchBp) {
+    grid-row: span 2;
+    margin: 0;
+    padding: calc(var(--spacer-700) * 1.375);
+    padding-inline-end: var(--spacer-1000);
+    border-radius: var(--borderRadius);
+    background-image: url("./../../../../assets/images/bg-sidebar-desktop.webp");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+.steps {
+  --clusterSpacer: var(--spacer-500);
+  @include flexCluster();
+
+  @include min-mq($layoutSwitchBp) {
+    flex-direction: column;
+    border-radius: var(--borderRadius);
+  }
+
+  .step {
+    &__link {
+      --focusOutlineClr: hsl(var(--clr-neu-100));
+      outline-offset: 2px;
+      @include min-mq($layoutSwitchBp) {
+        display: flex;
+        gap: var(--spacer-600);
+      }
+    }
+
+    &__number {
+      --mainClr: hsl(var(--clr-neu-100));
+
+      display: block;
+      @include circle(50px);
+      @include flexCentering();
+      border: 1px solid var(--mainClr);
+      color: var(--mainClr);
+      font-weight: var(--fw-medium);
+
+      &:hover {
+        --mainClr: hsl(var(--clr-neu-500));
+      }
+    }
+
+    &__link.js-current .step__number {
+      border-color: transparent;
+      color: hsl(var(--clr-pr-700));
+      background-color: hsl(var(--clr-neu-500));
+    }
+
+    &__details {
+      @include max-mq($layoutSwitchBp) {
+        @include screenReaderOnly();
+      }
+
+      span {
+        display: block;
+        line-height: 1.25;
+        text-transform: uppercase;
+
+        &:first-child {
+          color: hsl(var(--clr-neu-600));
+        }
+
+        &:last-child {
+          font-weight: var(--fw-medium);
+          color: hsl(var(--clr-neu-100));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<dl aria-label="Your Plan Details" *ngrxLet="summary$ as summary">
+    @if (summary) {
+    <div class="plan-name u-fw-medium u-text-pr-700 u-text-capitalize">
+        <dt class="u-sr-only">plan name</dt>
+        <dd>{{summary.plan.name}} <span aria-hidden="true">({{summary.duration}})</span> </dd>
+    </div>
+    <div class="u-sr-only u-fw-medium u-text-pr-700 u-text-capitalize">
+        <dt class="u-sr-only">plan duration</dt>
+        <dd>({{summary.duration}})</dd>
+    </div>
+    <div class="plan-price">
+        <dt class="u-sr-only">plan price</dt>
+        <dd class="u-fw-bold u-text-pr-700">
+            <form-item-price [value]="summary.plan.price" [duration]="summary.duration"></form-item-price>
+        </dd>
+    </div>
+    @if (summary.addOns.length !== 0) {
+    <div class="add-ons">
+        <dt class="u-sr-only">
+            Included Add-ons
+        </dt>
+        @for (addOn of summary.addOns; track $index) {
+        <dd class="l-flex-between">
+            <span class="u-fs-300">{{addOn.name | capitalize}}</span>
+            <form-item-price class="u-text-pr-700 u-fs-300" [value]="addOn.price" [duration]="summary.duration"
+                prefix="+"></form-item-price>
+        </dd>
+        }
+    </div>
+    }
+    <div class="total l-flex-between">
+        <dt class="u-fs-300">
+            Total (per {{summary.duration.slice(0, -2)}})
+        </dt>
+        <dd class="u-fs-500 u-fw-bold u-text-acc-500">
+            <form-item-price [value]="summary.totalPrice" [duration]="summary.duration"></form-item-price>
+        </dd>
+    </div>
+    }
+</dl>

@@ -1,0 +1,26 @@
+<ol class="steps" aria-label="Form Steps Navigation Links">
+
+    @for(step of steps; let index = $index; track index) {
+    <li class="step" *ngrxLet="index === currentStepIndex as isCurrentStep">
+
+        <a class="step__link" href="#{{step.name | link}}" [class.js-current]="isCurrentStep"
+            [attr.aria-current]="isCurrentStep ? 'step' : 'false'"
+            [attr.aria-disabled]="currentStepIndex === -1 || (steps[currentStepIndex].validity !== 'VALID' && !isCurrentStep)"
+            [style.cursor]="currentStepIndex === -1 ? 'auto' : 'pointer'" (click)="navigateToStep($event, index)">
+
+            <span aria-hidden="true" class="step__number">
+                {{index + 1}}
+            </span>
+            <span class="step__details">
+                <span>
+                    step {{index + 1}}<span class="u-sr-only">:</span>
+                </span>
+                <span>
+                    {{step.name}}
+                </span>
+            </span>
+
+        </a>
+    </li>
+    }
+</ol>

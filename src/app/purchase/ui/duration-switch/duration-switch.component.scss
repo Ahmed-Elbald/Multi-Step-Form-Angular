@@ -1,0 +1,45 @@
+@use "abstracts" as *;
+
+.radio-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacer-500);
+  padding: var(--spacer-500);
+  border-radius: 10px;
+  background-color: hsl(var(--clr-neu-300));
+}
+
+.duration-toggle-btn {
+  --select-height: 18px;
+
+  position: relative;
+  background-color: hsl(var(--clr-pr-700));
+  width: 40px;
+  border-radius: 100vh;
+  height: var(--select-height);
+
+  &::before {
+    --offest: 3px;
+    @include pseudoElement("");
+    left: calc(var(--offest));
+    top: calc(var(--offest));
+    background-color: hsl(var(--clr-neu-100));
+    @include circle(calc(var(--select-height) - calc(var(--offest)) * 2));
+    pointer-events: none;
+  }
+
+  &.js-yearly-plan::before {
+    left: calc(100% - (var(--select-height) - var(--offest)));
+  }
+}
+
+.label {
+  font-weight: var(--fw-medium);
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &.js-current {
+    color: hsl(var(--clr-pr-700));
+  }
+}

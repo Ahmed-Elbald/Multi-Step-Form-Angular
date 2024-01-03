@@ -1,0 +1,89 @@
+@use "abstracts/" as *;
+
+:host {
+  --inlinePadding: var(--spacer-500);
+  --borderRadius: 20px;
+  --width: 425px;
+
+  display: block;
+  padding-block-end: var(--spacer-1300);
+  padding-inline: var(--inlinePadding);
+  @include min-mq($layoutSwitchBp) {
+    --inlinePadding: var(--spacer-500) var(--spacer-1000);
+    --width: 450px;
+
+    max-width: map-get($breakpoints, tablet);
+    padding-block: var(--spacer-500);
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    gap: var(--spacer-500) var(--spacer-1000);
+    background-color: hsl(var(--clr-neu-100));
+    border-radius: var(--borderRadius);
+  }
+
+  form {
+    display: block;
+    width: var(--width);
+    min-height: 475px;
+    margin-inline: auto;
+    padding: calc(var(--spacer-700) * 1.125);
+    border-radius: calc(var(--borderRadius) * 0.5);
+    background-color: hsl(var(--clr-neu-100));
+
+    @include min-mq($layoutSwitchBp) {
+      padding-inline: 0;
+    }
+
+    > * {
+      width: 100%;
+    }
+
+    .card {
+      --highlightClr: hsl(var(--clr-acc-500) / 0.75);
+      display: block;
+      border-radius: 10px;
+      border: 1px solid hsl(var(--clr-neu-400));
+      outline: 1px solid transparent;
+
+      &:is(:hover, .js-highlight) {
+        border-color: var(--highlightClr);
+      }
+
+      &:focus-within:not(.js-highlight, :hover) {
+        outline-color: var(--highlightClr);
+      }
+
+      &.js-highlight {
+        background-color: hsl(var(--clr-neu-300));
+      }
+    }
+
+    .confirmation-msg {
+      padding-block: 2rem;
+      text-align: center;
+
+      @include max-mq($layoutSwitchBp) {
+        width: auto;
+      }
+
+      &__icon {
+        width: 75px;
+        margin-inline: auto;
+      }
+
+      &__title {
+        margin-block: var(--spacer-400) var(--spacer-200);
+        font-size: var(--fs-800);
+        font-weight: var(--fw-bold);
+        color: hsl(var(--clr-pr-700));
+      }
+
+      &__txt {
+        max-width: 350px;
+        margin-inline: auto;
+        line-height: 1.75;
+      }
+    }
+  }
+}

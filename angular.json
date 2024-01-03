@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "multi-step-from-angular-stanalone": {
+    "multi-step-from-angular-standalone": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/multi-step-from-angular-stanalone",
+            "outputPath": "dist/multi-step-from-angular-standalone",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -54,6 +54,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -84,10 +89,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "multi-step-from-angular-stanalone:build:production"
+              "buildTarget": "multi-step-from-angular-standalone:build:production"
             },
             "development": {
-              "buildTarget": "multi-step-from-angular-stanalone:build:development"
+              "buildTarget": "multi-step-from-angular-standalone:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -95,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "multi-step-from-angular-stanalone:build"
+            "buildTarget": "multi-step-from-angular-standalone:build"
           }
         },
         "test": {

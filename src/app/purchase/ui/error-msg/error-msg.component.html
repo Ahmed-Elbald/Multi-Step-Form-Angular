@@ -1,0 +1,5 @@
+@if (fc?.touched && !fc?.valid && fc?.errors) {
+<p @fadeInOut aria-live="assertive">
+    {{message}}
+</p>
+}

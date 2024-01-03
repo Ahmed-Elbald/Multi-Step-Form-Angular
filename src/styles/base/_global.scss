@@ -1,0 +1,138 @@
+@use "abstracts" as *;
+
+/* Global */
+:root {
+  --bodyTxtClr: hsl(var(--clr-sec-500));
+
+  --scrollbarWidth: 0.5rem;
+  --scrollbarThumbBg: hsl(var(--clr-pr-700));
+  --scrollbarTrackBg: hsl(var(--clr-neu-100));
+
+  --focusOutlineWidth: 2px;
+  --inputOutlineStyle: solid;
+  --ControlOutlineStyle: dashed;
+  --focusOutlineClr: currentcolor;
+  --linkOutlineOffset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: var(--scrollbarThumbBg);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbarTrackBg);
+}
+
+::selection {
+  color: hsl(var(--clr-neu-100));
+  background-color: hsl(var(--clr-pr-700));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  transition-duration: 250ms;
+
+  @media (prefers-reduced-motion: true) {
+    transition-duration: 0ms;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--bodyTxtClr);
+  font-family: var(--ff-pr);
+  font-size: var(--fs-400);
+  line-height: 1.5;
+}
+
+input,
+button,
+textarea,
+a {
+  outline-width: var(--focusOutlineWidth);
+  outline-color: transparent;
+
+  &:focus-visible {
+    outline-color: var(--focusOutlineClr);
+    text-decoration: none;
+  }
+
+  @supports not selector(:focus-visible) {
+    &:focus {
+      outline-color: var(--focusOutlineClr);
+      text-decoration: none;
+    }
+  }
+}
+
+input,
+button,
+textarea {
+  display: block;
+  border: none;
+  outline-offset: calc(-1 * var(--focusOutlineWidth));
+}
+
+input,
+textarea {
+  outline-style: var(--inputOutlineStyle);
+}
+
+a,
+button {
+  outline-style: var(--ControlOutlineStyle);
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  background-color: transparent;
+  color: inherit;
+  text-align: unset;
+  cursor: pointer;
+
+  > * {
+    pointer-events: none;
+  }
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: inherit;
+  color: inherit;
+}
+
+fieldset {
+  border: none;
+
+  legend {
+    @include screenReaderOnly();
+  }
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

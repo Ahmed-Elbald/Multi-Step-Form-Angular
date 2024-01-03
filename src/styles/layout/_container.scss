@@ -1,0 +1,32 @@
+@use "../abstracts" as *;
+
+// Containers
+.l-container {
+  --inlineMargin: var(--spacer-200);
+  --minWidthStatic: calc(#{map-get($breakpoints, tablet)} + 100px);
+  --minWidthPercent: 90%;
+  --diffInPixels: 150px;
+  --diffInPercnet: 10%;
+
+  width: calc(100% - calc(var(--inlineMargin) * 2));
+  margin-inline: var(--inlineMargin);
+
+  @include min-mq(mobile) {
+    width: min(var(--minWidthPercent), var(--minWidthStatic));
+    margin-inline: auto;
+
+    &[data-width="narrow"] {
+      width: min(
+        var(--minWidthPercent) - var(--diffInPercent),
+        var(--minWidthStatic) - var(--diffInPixels)
+      );
+    }
+
+    &[data-width="wide"] {
+      width: min(
+        var(--minWidthPercent) + var(--diffInPercent),
+        var(--minWidthStatic) + var(--diffInPixels)
+      );
+    }
+  }
+}

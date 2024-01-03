@@ -1,0 +1,38 @@
+<div class="add-ons">
+    @for (addOn of addOns | async; track $index; let f = $first) {
+    <div formCard *ngrxLet="{isIncluded: includedAddOns.includes(addOn.name), addOnNameDashed: addOn.name | link} as vm"
+        [highlightBg]="vm.isIncluded">
+        <div class="add-on">
+            <div class="add-on__checkbox">
+                <label for="{{vm.addOnNameDashed}}">
+                    <span class="u-sr-only">
+                        {{addOn.name}}
+                    </span>
+                </label>
+                <input class="u-sr-only" type="checkbox" name="{{vm.addOnNameDashed}}" id="{{vm.addOnNameDashed}}"
+                    value="{{addOn.name}}" (change)="handleChange($event)" [checked]="vm.isIncluded"
+                    [attr.aria-details]="vm.addOnNameDashed + '-details'" [attr.data-autoFocus]="f">
+            </div>
+
+            <dl class="add-on__details" id="{{vm.addOnNameDashed}}-details">
+                <div>
+                    <dt class="u-sr-only">add-on name</dt>
+                    <dd class="u-fw-medium u-text-pr-700 u-text-capitalize">{{addOn.name}}</dd>
+                </div>
+                <div>
+                    <dt class="u-sr-only">add-on description</dt>
+                    <dd class="u-fs-300">{{addOn.description}}</dd>
+                </div>
+                <div>
+                    <dt class="u-sr-only">add-on price</dt>
+                    <dd>
+                        <form-item-price class="u-text-acc-500 u-fs-300" [value]="addOn"
+                            [duration]="duration"></form-item-price>
+                    </dd>
+                </div>
+            </dl>
+
+        </div>
+    </div>
+    }
+</div>

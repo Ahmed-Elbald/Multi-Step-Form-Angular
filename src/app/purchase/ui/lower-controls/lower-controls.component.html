@@ -1,0 +1,20 @@
+<div class="wrapper">
+
+    @if (currentStepIndex !== 0) {
+    <a href="#{{steps[currentStepIndex - 1].name | link}}" class="previous-step-link" (click)="goBack($event)">
+        Go back
+    </a>
+    } @else {
+    <span aria-hidden="true"></span>
+    }
+    @if (currentStepIndex !== steps.length - 1) {
+    <a [attr.aria-disabled]="currentStepIndex === -1 || steps[currentStepIndex].validity !== 'VALID'"
+        href="#{{steps[currentStepIndex + 1].name | link}}" class="next-step-link" (click)="goForward($event)">
+        next step
+    </a>
+    } @else {
+    <button type="submit" class="submit-btn" (click)="confirm($event)">confirm <span class="u-sr-only">and
+            submit</span></button>
+    }
+
+</div>

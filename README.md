@@ -18,7 +18,7 @@ Here are some of them:
    At first, I was going to use the `AppComponent` as the main component for the form feature. But then
    I decided that such a form can not be the main feature of an application. So, I've decided to make a separate feature
    called `purchase`, in which I included the whole form. Regarding the structure of each feature's folder, I took that from
-   []() about structuring Angular projects.
+   [Joshua Morony's video](https://youtu.be/7SDpTOLeqHE?si=wTS9S5t-O4tRaJ_t) about structuring Angular projects.
 
 2. **Should I use NgRx Global or Component Store?**
 

@@ -47,3 +47,7 @@ In order to create this form, which is quite complex, I learned some Angular tec
 1. Creating custom form controls using the `ControlValueAccessor` Interface.
 2. Making reusable input components by providing the `ControlContainer` to the component view.
 3. Some important WAI ARIA attributes form forms like `aria-invalid` and `aria-errormessage`.
+
+## Contribution
+
+I made this project to practice my personal skills, thus I don't really prefer that you do any pull requests. However, I'm open to any ideas or feadback. Feel free to do that in the [discussions section](https://github.com/Ahmed-Elbald/Multi-Step-Form-Angular/discussions).

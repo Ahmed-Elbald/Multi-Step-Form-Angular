@@ -10,6 +10,29 @@
 <br>
 <br>
 
+## Built with
+
+- HTML
+- SCSS
+- Typescript
+- Angular v17
+- NgRx Component Store
+- RxJs
+
+## App features
+
+I've implemented all the features required by the original challenge including, thus the user can:
+
+- Complete each step of the sequence
+- Go back to a previous step to update their selections
+- See a summary of their selections on the final step and confirm their order
+- Receive form validation messages if:
+   - A field has been missed
+   - The email address is not formatted correctly
+- See hover and focus states for all interactive elements on the page
+
+In addition, most form sections are build dynamically allowing for other features to be added easily in the future.
+
 ## Intro
 
 This is one of Frontend Mentor's interesting challenges. It's not the first time I tackle it though. I did it about

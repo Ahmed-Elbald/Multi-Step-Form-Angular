@@ -1,0 +1,36 @@
+<!-- Name Input -->
+<ng-container *ngrxLet="{name: 'name', control: controlContainer.controls.name} as controlVM">
+    <div>
+        <label class="label" for="{{controlVM.name}}Control">name</label>
+        <form-error-msg [controlName]="controlVM.name" id="{{controlVM.name}}ControlErrorMsg"></form-error-msg>
+    </div>
+    <input class="control" type="text" [name]="controlVM.name" id="{{controlVM.name}}Control"
+        [attr.data-autoFocus]="controlContainer.parent?.dirty ? true : false" [formControlName]="controlVM.name"
+        placeholder="e.g. Stephen King" autocomplete="given-name" required
+        [attr.aria-invalid]="!controlVM.control.valid && controlVM.control.touched ? true : false"
+        [attr.aria-errormessage]="controlVM.name + 'ControlErrorMsg'">
+</ng-container>
+
+<!-- Email Input -->
+<ng-container *ngrxLet="{name: 'email', control: controlContainer.controls.email} as controlVM">
+    <div>
+        <label class="label" for="{{controlVM.name}}Control">Email</label>
+        <form-error-msg [controlName]="controlVM.name" id="{{controlVM.name}}ControlErrorMsg"></form-error-msg>
+    </div>
+    <input class="control" type="email" [name]="controlVM.name" id="{{controlVM.name}}Control"
+        [formControlName]="controlVM.name" placeholder="e.g. stephenking@lorem.com" autocomplete="email" required
+        [attr.aria-invalid]="!controlVM.control.valid && controlVM.control.touched ? true : false"
+        [attr.aria-errormessage]="controlVM.name + 'ControlErrorMsg'">
+</ng-container>
+
+<!-- Phone Number Input -->
+<ng-container *ngrxLet="{name: 'phoneNumber', control: controlContainer.controls.phoneNumber} as controlVM">
+    <div>
+        <label class="label" for="{{controlVM.name}}Control">Phone Number</label>
+        <form-error-msg [controlName]="controlVM.name" id="{{controlVM.name}}ControlErrorMsg"></form-error-msg>
+    </div>
+    <input class="control" type="tel" [name]="controlVM.name" id="{{controlVM.name}}Control"
+        [formControlName]="controlVM.name" placeholder="e.g. 1 234 567 890" autocomplete="tel" required
+        [attr.aria-invalid]="!controlVM.control.valid && controlVM.control.touched ? true : false"
+        [attr.aria-errormessage]="controlVM.name + 'ControlErrorMsg'">
+</ng-container>

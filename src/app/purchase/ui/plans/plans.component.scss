@@ -22,6 +22,10 @@
       gap: var(--spacer-700);
     }
 
+    &:focus-within {
+      box-shadow: 0 0 10px hsl(var(--clr-neu-400));
+    }
+
     &__media {
       justify-self: flex-start;
       height: 50px;

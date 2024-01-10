@@ -1,22 +1,23 @@
 <fieldset class="plans">
     <legend>Plan name</legend>
-    @for (plan of plans | async; track $index) {
+    @for (plan of plans; track $index) {
     <div formCard [highlightBg]="plan.selected">
         <label class="label">
             <div class="label__media"><img src="{{plan.icon}}" alt=""></div>
             <div class="label__content">
                 <input class="u-sr-only" type="radio" name="name" [value]="plan.name" formControlName="name"
-                    [attr.data-autoFocus]="plan.selected">
+                    [attr.data-autoFocus]="plan.selected" autocomplete="off">
                 <span class="u-fw-medium u-text-pr-700 u-text-capitalize">{{plan.name}} <span
                         class="u-sr-only">plan</span>
                 </span>
-                <div>
+                <span>
                     <form-item-price class="u-fs-300" [value]="plan" [duration]="duration"></form-item-price>
-                </div>
-                <span class="u-text-pr-700 u-fs-300" [class.js-hidden]="duration === 'monthly'">2 month free <span
-                        class="u-sr-only">in
-                        case of yearly
-                        subscription</span>
+                </span>
+                <span [class.js-hidden]="duration === 'monthly'">
+                    <small class="u-text-pr-700 u-fs-300">2 month free <span class="u-sr-only">in
+                            case of yearly
+                            subscription</span>
+                    </small>
                 </span>
             </div>
         </label>

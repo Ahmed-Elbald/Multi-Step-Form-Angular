@@ -1,13 +1,14 @@
-import { Component, Input, inject } from '@angular/core';
-import { constants } from '../../../shared/constants';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { ControlContainer, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
+
 import { Plan } from '../../utils/models/plan.model';
 import { PlanDuration } from '../../utils/models/state.model';
 import { DurationPipe } from '../../utils/pipes/duration.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CardDirective } from '../../utils/directives/card.directive';
 import { ItemPriceComponent } from '../item-price/item-price.component';
-import { FormStore } from '../../data-access/form.store';
-import { AsyncPipe } from '@angular/common';
+import { controlParentProvider } from '../../../app.config';
+import { Form } from '../../utils/models/form.model';
 
 
 @Component({
@@ -16,14 +17,21 @@ import { AsyncPipe } from '@angular/common';
   imports: [ReactiveFormsModule, ItemPriceComponent, CardDirective, DurationPipe, AsyncPipe],
   templateUrl: './plans.component.html',
   styleUrl: './plans.component.scss',
-  viewProviders: [constants.controlParentProvider]
+  viewProviders: [controlParentProvider]
 })
-export class PlansComponent {
+export class PlansComponent implements OnInit {
+
+  // Deps
+  planFormControl = (inject(ControlContainer).control as Form["selectedPlan"]).controls.name;
 
   // Input variables
   @Input({ required: true }) public duration!: PlanDuration;
+  @Input({ required: true }) plans!: Plan[];
 
-  // Public fields
-  public plans = inject(FormStore).plans$;
+  ngOnInit(): void {
+    // Set default value
+    if (this.planFormControl.value === this.planFormControl.defaultValue)
+      this.planFormControl.setValue(this.plans[0].name);
+  }
 
 }

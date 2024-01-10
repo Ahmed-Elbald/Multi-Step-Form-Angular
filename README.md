@@ -1,13 +1,15 @@
 ![Design preview for the Multi-step form coding challenge](./design/desktop-preview.jpg)
 
-<h1 align="center" margin="0">
-   Frontend Mentor - Multi-step form 
-   <br>
-   <br>
-   <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub">Challenge</a>
-   <span>|</span>
-   <a href="https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW">My Solution</a>
-</h1>
+<div  align="center">
+   <h1>
+      Frontend Mentor - Multi-step form
+      <br>
+      <br>
+      <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub">Challenge</a>
+      <span>|</span>
+      <a href="https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW">My Solution</a>
+   </h1>
+</div>
 <br>
 <br>
 

@@ -5,7 +5,8 @@ Frontend Mentor - Multi-step form
 </h1>
 
 <h2 align="center">
-   [Challenge | ](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub)[My Solution](https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW)
+   <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub">Challenge</a> | 
+   <a href="https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW">My Solution</a> | 
 </h2>
 
 ## Intro

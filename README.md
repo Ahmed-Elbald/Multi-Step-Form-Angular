@@ -10,7 +10,7 @@
 <br>
 <br>
 
-## Built with
+## Built With
 
 - HTML
 - SCSS
@@ -19,7 +19,7 @@
 - NgRx Component Store
 - RxJs
 
-## App features
+## App Features
 
 I've implemented all the features required by the original challenge, thus the user can:
 
@@ -30,6 +30,7 @@ I've implemented all the features required by the original challenge, thus the u
   - A field has been missed
   - The email address is not formatted correctly
 - See hover and focus states for all interactive elements on the page
+- See animation effects when navigating from step to another
 
 In addition, most form sections are built dynamically allowing for other features to be added easily in the future.
 

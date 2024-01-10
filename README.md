@@ -1,6 +1,6 @@
 ![Design preview for the Multi-step form coding challenge](./design/desktop-preview.jpg)
 
-<h1 align="center">
+<h1 align="center" margin="0">
    Frontend Mentor - Multi-step form 
    <br>
    <br>

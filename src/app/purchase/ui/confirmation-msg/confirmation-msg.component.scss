@@ -1,0 +1,28 @@
+@use "abstracts" as *;
+
+.confirmation-msg {
+  padding-block: 2rem;
+  text-align: center;
+
+  @include max-mq($layoutSwitchBp) {
+    width: auto;
+  }
+
+  &__icon {
+    width: 75px;
+    margin-inline: auto;
+  }
+
+  &__title {
+    margin-block: var(--spacer-400) var(--spacer-200);
+    font-size: var(--fs-800);
+    font-weight: var(--fw-bold);
+    color: hsl(var(--clr-pr-700));
+  }
+
+  &__txt {
+    max-width: 350px;
+    margin-inline: auto;
+    line-height: 1.75;
+  }
+}

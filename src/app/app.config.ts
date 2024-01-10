@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations'
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, Provider, inject } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -8,3 +9,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations()
   ]
 };
+
+export const controlParentProvider: Provider = {
+  provide: ControlContainer,
+  useFactory: () => inject(ControlContainer, { skipSelf: true })
+}

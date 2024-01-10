@@ -1,6 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
+import { AfterViewInit, Component, Input, inject } from '@angular/core';
 import { AbstractControl, ControlContainer } from '@angular/forms';
-import { fadeInOut } from '../../utils/animations/form.animations';
+import { fadeInOutAnimation } from '../../../shared/animations/form.animations';
+import { formErrorMsgs } from '../../data-access/ui/errors';
 
 @Component({
   selector: 'form-error-msg',
@@ -8,12 +9,12 @@ import { fadeInOut } from '../../utils/animations/form.animations';
   imports: [],
   templateUrl: './error-msg.component.html',
   styleUrl: './error-msg.component.scss',
-  animations: [fadeInOut]
+  animations: [fadeInOutAnimation()]
 })
-export class ErrorMsgComponent {
+export class ErrorMsgComponent implements AfterViewInit {
 
   // Deps
-  private controlContainer = inject(ControlContainer, { optional: true });
+  private controlContainer = inject(ControlContainer, { optional: true })?.control;
 
   // Input Variables
   @Input({ alias: "controlName", required: true }) name!: string;
@@ -22,22 +23,14 @@ export class ErrorMsgComponent {
   public fc!: AbstractControl | null | undefined;
 
   public get message(): string {
-    const errorKey = Object.keys(this.fc!.errors!)[0];
-    switch (errorKey) {
-    case "required":
-      return "This field is required"
-    case "email":
-      return "Invalid email"
-    case "pattern":
-      return "Invalid phone number"
-    default:
-      return "Invalid input"
-    }
+    const errors = this.fc!.errors!
+    const errorKey = Object.keys(errors)[0];
+    return formErrorMsgs[errorKey](errors[errorKey])
   }
 
   // Public Methods
   ngAfterViewInit(): void {
-    setTimeout(() => this.fc = this.controlContainer?.control?.get(this.name), 0)
+    setTimeout(() => this.fc = this.controlContainer?.get(this.name), 0)
   }
 
 }

@@ -7,29 +7,31 @@ import { StepsListComponent } from '../../ui/steps-list/steps-list.component';
 import { LowerControlsComponent } from '../../ui/lower-controls/lower-controls.component';
 import { FormStore } from '../../data-access/form.store';
 import { Form } from '../../utils/models/form.model';
-import { StepComponent } from '../../ui/step/step.component';
+import { StepContainerComponent } from '../../ui/step-container/step-container.component';
 import { LinkPipe } from '../../utils/pipes/link.pipe';
-import { TextboxComponent } from '../../ui/textbox/textbox.component';
 import { DurationSwitchComponent } from '../../ui/duration-switch/duration-switch.component';
-import { constants } from '../../../shared/constants';
 import { PersonalInfo, PlanDuration } from '../../utils/models/state.model';
 import { PlansComponent } from '../../ui/plans/plans.component';
 import { AddOnsComponent } from '../../ui/add-ons/add-ons.component';
 import { SummaryComponent } from '../../ui/summary/summary.component';
-import { changeStep } from '../../utils/animations/form.animations';
+import { childFadeInOutAnimatoin } from '../../../shared/animations/form.animations';
+import { regularExpressions } from '../../data-access/ui/regular-expressions';
+import { PersonalInfoComponent } from '../../ui/personal-info/personal-info.component';
+import { ConfirmationMsgComponent } from '../../ui/confirmation-msg/confirmation-msg.component';
+import { AnimationEvent } from '@angular/animations';
 
 @Component({
   selector: 'app-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule, StepComponent, StepsListComponent,
-    TextboxComponent, PlansComponent, AddOnsComponent, DurationSwitchComponent,
-    SummaryComponent, LowerControlsComponent, LetDirective
+    ReactiveFormsModule, StepContainerComponent, StepsListComponent,
+    PersonalInfoComponent, PlansComponent, AddOnsComponent, DurationSwitchComponent,
+    SummaryComponent, ConfirmationMsgComponent, LowerControlsComponent, LetDirective
   ],
   providers: [FormStore, LinkPipe],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
-  animations: [changeStep]
+  animations: [childFadeInOutAnimatoin]
 })
 export class FormComponent implements OnInit {
 
@@ -38,12 +40,8 @@ export class FormComponent implements OnInit {
   private store = inject(FormStore);
 
   // Public fields
-  public steps$ = this.store.steps$;
-  public selectedPlan$ = this.store.selectedPlan$;
-  public planDuration$ = this.store.planDuration$;
-  public currentStepIndex$ = this.store.currentStepIndex$;
-
   public form!: FormGroup<Form>;
+  public vm$ = this.store.vm$;
 
   // Public Methods
   ngOnInit(): void {
@@ -51,8 +49,6 @@ export class FormComponent implements OnInit {
     this.createForm();
     // Trigger State Updates
     this.triggerStateUpdates();
-    // Load Form Data And Set Default Form Values
-    this.store.init(this.form);
   }
 
   createForm() {
@@ -60,7 +56,7 @@ export class FormComponent implements OnInit {
       personalInfo: this.fb.group({
         name: ["", [Validators.required]],
         email: ["", [Validators.required, Validators.email]],
-        phoneNumber: ["", [Validators.required, Validators.pattern(constants.phoneNumberRegExp)]]
+        phoneNumber: ["", [Validators.required, Validators.pattern(regularExpressions["phoneNumber"].pattern)]]
       }, { updateOn: "blur" }),
       selectedPlan: this.fb.group({
         name: [""],
@@ -89,11 +85,19 @@ export class FormComponent implements OnInit {
 
   handleStepChange(navigationData: { event: MouseEvent, index: number }) {
     this.store.navigateToStep(navigationData);
-    this.form.controls.personalInfo.markAllAsTouched();
-    setTimeout(
-      () => (document.querySelector("[data-autoFocus='true']") as HTMLInputElement | undefined)?.focus(),
-      750
-    )
+
+    for (const control of Object.values(this.form.controls.personalInfo.controls))
+      if (control.invalid) {
+        control.markAsTouched();
+        break;
+      }
+
+  }
+
+  onStepChange(animationEvent: AnimationEvent) {
+    setTimeout(() =>
+      (animationEvent.element.querySelector("[data-autoFocus='true']") as HTMLInputElement | undefined)?.focus()
+      , 0)
   }
 
 }

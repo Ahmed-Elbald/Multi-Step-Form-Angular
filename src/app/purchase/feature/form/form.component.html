@@ -1,78 +1,67 @@
-<ng-container *ngrxLet="{
-        steps: steps$, currentStepIndex: currentStepIndex$,
-        selectedPlan: selectedPlan$, planDuration: planDuration$} as vm">
+<ng-container *ngrxLet="vm$ as vm">
 
     <!-- Steps Navigation Links -->
     <form-steps-list [steps]="vm.steps" [currentStepIndex]="vm.currentStepIndex"
         (stepChange)="handleStepChange($event)"></form-steps-list>
 
     <!-- Main Form -->
-    <form [formGroup]="form" [@change]="vm.currentStepIndex">
+    <form [formGroup]="form" [@childFadeInOutMerge]="vm.currentStepIndex"
+        (@childFadeInOutMerge.done)="onStepChange($event)">
 
         @switch (vm.currentStepIndex) {
+
+        <!-- Personal Info -->
         @case (0) {
-        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Personal info">
+        <form-step-container [stepName]="vm.steps[vm.currentStepIndex].name" heading="Personal info">
             <ng-container ngProjectAs="[description]">
                 Please provide your name, email address, and phone number.
             </ng-container>
             <ng-container ngProjectAs="[content]" formGroupName="personalInfo">
-                <form-textbox label="Name" name="name" autoComplete="given-name" placeholder="e.g. Stephen King"
-                    [defaultFocus]="true"></form-textbox>
-                <form-textbox label="Email" type="email" name="email" autoComplete="email"
-                    placeholder="e.g. stephenking@lorem.com"></form-textbox>
-                <form-textbox label="Phone Number" type="tel" name="phoneNumber" autoComplete="tel"
-                    placeholder="e.g. 1 234 567 890"></form-textbox>
+                <form-personal-info></form-personal-info>
             </ng-container>
-        </form-step>
+        </form-step-container>
         }
+
+        <!-- Plan -->
         @case (1) {
-        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Select your plan">
+        <form-step-container [stepName]="vm.steps[vm.currentStepIndex].name" heading="Select your plan">
             <ng-container ngProjectAs="[description]">
                 You have the option of monthly or yearly billing.
             </ng-container>
             <ng-container ngProjectAs="[content]" formGroupName="selectedPlan">
-                <form-plans [duration]="vm.planDuration"></form-plans>
+                <form-plans [plans]="vm.plans" [duration]="vm.planDuration"></form-plans>
                 <form-duration-switch [planDuration]="vm.planDuration"
                     (durationChange)="togglePlanDuration($event)"></form-duration-switch>
             </ng-container>
-        </form-step>
+        </form-step-container>
         }
+
+        <!-- Add-ons -->
         @case (2) {
-        <form-step [stepName]="vm.steps[vm.currentStepIndex].name" heading="Pick add-ons">
+        <form-step-container [stepName]="vm.steps[vm.currentStepIndex].name" heading="Pick add-ons">
             <ng-container ngProjectAs="[description]">
                 Add-ons help enhance your gaming experience
             </ng-container>
-            <ng-container ngProjectAs="[content]">
-                <form-add-ons [selectedPlan]="vm.selectedPlan" [duration]="vm.planDuration"
-                    formControlName="includedAddOns"></form-add-ons>
-            </ng-container>
-        </form-step>
+            <form-add-ons ngProjectAs="[content]" [addOns]="vm.addOns" [selectedPlan]="vm.selectedPlan"
+                [duration]="vm.planDuration" formControlName="includedAddOns"></form-add-ons>
+        </form-step-container>
         }
+
+        <!-- Summary -->
         @case (3) {
-        <form-step [group]="false" [stepName]="vm.steps[vm.currentStepIndex].name" heading="Finishing up">
+        <form-step-container [group]="false" [stepName]="vm.steps[vm.currentStepIndex].name" heading="Finishing up">
             <ng-container ngProjectAs="[description]">
                 Double-check everything looks OK before confirming.
             </ng-container>
-            <ng-container ngProjectAs="[content]">
-                <form-summary></form-summary>
-            </ng-container>
-        </form-step>
+            <form-summary ngProjectAs="[content]" [summary]="vm.formSummary!"></form-summary>
+        </form-step-container>
         }
+
+        <!-- Confirmation Message -->
         @case (-1) {
-        <section class="confirmation-msg">
-            <div class="confirmation-msg__icon">
-                <img src="./../../../../assets/images/icon-thank-you.svg" alt="">
-            </div>
-            <h2 class="confirmation-msg__title">
-                Thank you!
-            </h2>
-            <p class="confirmation-msg__txt">
-                Thanks for confirming your subscription! We hope you have fun
-                using our platform. If you ever need support, please feel free
-                to email us at {{'support@loremgaming.com'}}
-            </p>
-        </section>
+        <form-confirmation-msg></form-confirmation-msg>
         }
+
         }
 
 

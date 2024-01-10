@@ -1,23 +1,20 @@
-import { Injectable, inject } from "@angular/core"
-import { ComponentStore, tapResponse } from "@ngrx/component-store"
-import { combineLatest, tap } from "rxjs"
-import { HttpErrorResponse } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { ComponentStore } from "@ngrx/component-store"
+import { FormControlStatus } from "@angular/forms"
+import { tap } from "rxjs"
 
 import { FormState, PersonalInfo, PlanDuration } from "../utils/models/state.model"
-import { FormDataService } from "./form-data.service"
-import { FormControlStatus, FormGroup } from "@angular/forms"
-import { constants } from "../../shared/constants"
-import { Form } from "../utils/models/form.model"
+
+import { formSteps } from "./ui/steps";
+import { formPlans } from "./ui/plans";
+import { formAddOns } from "./ui/add-ons";
+import { planDurationMap } from "./ui/plans";
 
 const formInitialState: FormState = {
-    steps: [
-        { name: "your info", validity: "INVALID" },
-        { name: "select plan", validity: "VALID" },
-        { name: "add-ons", validity: "VALID" },
-        { name: "summary", validity: "VALID" },
-    ],
-    plans: [],
-    addOns: [],
+    steps: formSteps,
+    plans: formPlans.map((plan, i) => ({ ...plan, selected: i === 0 })),
+    addOns: formAddOns.map(addOn => ({ ...addOn, included: false })),
+
     currentStepIndex: 0,
     userInput: {
         personalInfo: {
@@ -33,30 +30,27 @@ const formInitialState: FormState = {
 @Injectable()
 export class FormStore extends ComponentStore<FormState> {
 
-    // Deps
-    private formDataService = inject(FormDataService);
-
     // Initialization
     constructor() { super(formInitialState) }
 
     // Selectors
-    public readonly steps$ = this.select(state => state.steps);
-    public readonly plans$ = this.select(state => state.plans);
-    public readonly addOns$ = this.select(state => state.addOns);
+    private readonly steps$ = this.select(state => state.steps);
+    private readonly plans$ = this.select(state => state.plans);
+    private readonly addOns$ = this.select(state => state.addOns);
 
-    public readonly currentStepIndex$ = this.select(state => state.currentStepIndex);
-    public readonly selectedPlan$ = this.select(state => state.plans.find(plan => plan.selected));
-    public readonly planDuration$ = this.select(state => state.userInput.planDuration);
-    public readonly includedAddOns$ = this.select(state => state.addOns.filter(addOn => addOn.included));
+    private readonly currentStepIndex$ = this.select(state => state.currentStepIndex);
+    private readonly selectedPlan$ = this.select(state => state.plans.find(plan => plan.selected));
+    private readonly planDuration$ = this.select(state => state.userInput.planDuration);
+    private readonly includedAddOns$ = this.select(state => state.addOns.filter(addOn => addOn.included));
 
-    public readonly formSummary$ = this.select(
+    private readonly formSummary$ = this.select(
         this.selectedPlan$,
         this.includedAddOns$,
         this.planDuration$,
         (selectedPlan, includedAddOns, planDuration) => {
 
             if (selectedPlan) {
-                const map = constants.planDurationMap[planDuration];
+                const map = planDurationMap[planDuration];
                 return {
                     duration: planDuration,
                     plan: {
@@ -73,6 +67,27 @@ export class FormStore extends ComponentStore<FormState> {
 
             return null;
         }
+    )
+
+    public readonly vm$ = this.select(
+        this.steps$,
+        this.plans$,
+        this.addOns$,
+        this.currentStepIndex$,
+        this.planDuration$,
+        this.selectedPlan$,
+        this.includedAddOns$,
+        this.formSummary$,
+        (steps, plans, addOns, currentStepIndex, planDuration, selectedPlan, includedAddOns, formSummary) => ({
+            steps,
+            plans,
+            addOns,
+            currentStepIndex,
+            planDuration,
+            selectedPlan,
+            includedAddOns,
+            formSummary,
+        })
     )
 
     // Updaters
@@ -99,31 +114,6 @@ export class FormStore extends ComponentStore<FormState> {
     )
 
     // Effects
-    public readonly init = this.effect<FormGroup>(
-        fg$ => combineLatest([this.formDataService.getPlans(), this.formDataService.getAddOns()])
-            .pipe(tapResponse({
-                next: ([plans, addOns]) => {
-
-                    // Populate State
-                    this.patchState((state) => ({
-                        ...state,
-                        plans: plans.map((plan, index) => ({ ...plan, selected: index === 0 })),
-                        addOns: addOns.map(addOn => ({ ...addOn, included: false }))
-                    }));
-
-                    // Set Form Defaults
-                    this.setFormDefaults(fg$)
-                },
-                error: (error: HttpErrorResponse) => console.log(error)
-            }))
-    );
-
-    public readonly setFormDefaults = this.effect<FormGroup<Form>>(
-        (fg$) => fg$.pipe(tap(fg => {
-            fg.controls.selectedPlan.controls.name.setValue(this.get(state => state.plans[0].name))
-        }))
-    );
-
     public readonly navigateToStep = this.effect<{ event: MouseEvent, index: number }>(
         (navigationData$) => navigationData$.pipe(tap(({ event, index }) => {
 

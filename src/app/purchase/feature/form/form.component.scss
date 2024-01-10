@@ -38,52 +38,5 @@
     > * {
       width: 100%;
     }
-
-    .card {
-      --highlightClr: hsl(var(--clr-acc-500) / 0.75);
-      display: block;
-      border-radius: 10px;
-      border: 1px solid hsl(var(--clr-neu-400));
-      outline: 1px solid transparent;
-
-      &:is(:hover, .js-highlight) {
-        border-color: var(--highlightClr);
-      }
-
-      &:focus-within:not(.js-highlight, :hover) {
-        outline-color: var(--highlightClr);
-      }
-
-      &.js-highlight {
-        background-color: hsl(var(--clr-neu-300));
-      }
-    }
-
-    .confirmation-msg {
-      padding-block: 2rem;
-      text-align: center;
-
-      @include max-mq($layoutSwitchBp) {
-        width: auto;
-      }
-
-      &__icon {
-        width: 75px;
-        margin-inline: auto;
-      }
-
-      &__title {
-        margin-block: var(--spacer-400) var(--spacer-200);
-        font-size: var(--fs-800);
-        font-weight: var(--fw-bold);
-        color: hsl(var(--clr-pr-700));
-      }
-
-      &__txt {
-        max-width: 350px;
-        margin-inline: auto;
-        line-height: 1.75;
-      }
-    }
   }
 }

@@ -4,7 +4,8 @@
    Frontend Mentor - Multi-step form 
    <br>
    <br>
-   <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub">Challenge</a> |
+   <a href="https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub">Challenge</a>
+   <span color="#0000007d">|</span>
    <a href="https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW">My Solution</a>
 </h1>
 

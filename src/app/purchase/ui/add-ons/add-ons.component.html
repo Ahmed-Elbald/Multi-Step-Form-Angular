@@ -1,5 +1,5 @@
 <div class="add-ons">
-    @for (addOn of addOns | async; track $index; let f = $first) {
+    @for (addOn of addOns; track $index; let f = $first) {
     <div formCard *ngrxLet="{isIncluded: includedAddOns.includes(addOn.name), addOnNameDashed: addOn.name | link} as vm"
         [highlightBg]="vm.isIncluded">
         <div class="add-on">

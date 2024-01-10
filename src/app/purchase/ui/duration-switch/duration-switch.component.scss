@@ -34,6 +34,11 @@
   }
 }
 
+.radio-group:focus-within .duration-toggle-btn {
+  outline-color: currentColor;
+  outline-offset: 0;
+}
+
 .label {
   font-weight: var(--fw-medium);
   text-transform: capitalize;

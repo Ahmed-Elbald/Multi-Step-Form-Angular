@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PlanDuration } from '../../utils/models/state.model';
-import { constants } from '../../../shared/constants';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { PlanDuration } from '../../utils/models/state.model';
+import { controlParentProvider } from '../../../app.config';
 
 @Component({
   selector: 'form-duration-switch',
@@ -9,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule],
   templateUrl: './duration-switch.component.html',
   styleUrl: './duration-switch.component.scss',
-  viewProviders: [constants.controlParentProvider]
+  viewProviders: [controlParentProvider]
 })
 export class DurationSwitchComponent {
 

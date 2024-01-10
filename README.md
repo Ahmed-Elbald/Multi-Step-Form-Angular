@@ -1,6 +1,13 @@
-# Frontend Mentor - Multi-step form
-
 ![Design preview for the Multi-step form coding challenge](./design/desktop-preview.jpg)
+
+<h1 align="center">
+Frontend Mentor - Multi-step form
+</h1>
+
+<div align="center">
+   [Challenge | ](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ/hub)
+   [My Solution](https://www.frontendmentor.io/solutions/mulitstep-form-with-angular-woCXBDbrYW)
+</div>
 
 ## Intro
 
@@ -26,15 +33,7 @@ Here are some of them:
    and how important it might be. I ended up deciding that its state could be managed using the Component Store. I don't know
    if my decision was right especially that my store file is quite long. I would appreciate any feedback concerning that matter.
 
-3. **Should I put static data in my store?**
-
-   The original challenge does not require that, but I've separated plans and add-ons data in JSON files, so that I can generate the
-   form dynamically. But then I wondered where to put this data... Should I put it in the store or in a service? Or maybe I can just
-   store them in a `constants.ts` file and dump my JSON files. Finally, I found out that I can store this static data in my store
-   and, still, use it in runtime. For instance, After fetching plans data, I add a `selected` property to each `plan` object to decided
-   what the currently selected plan is. I do something quite similar with add-ons.
-
-4. **Structuring the form:**
+3. **Structuring the form:**
 
    Since the form is multi-step, I had to decide how to split those steps... Should they have different routes or may I just use links
    that point to page fragments like `#personal-info` or `#summary`? I finally opted to use fragments as it seemed to me that transitioning
@@ -46,8 +45,8 @@ In order to create this form, which is quite complex, I learned some Angular tec
 
 1. Creating custom form controls using the `ControlValueAccessor` Interface.
 2. Making reusable input components by providing the `ControlContainer` to the component view.
-3. Some important WAI ARIA attributes form forms like `aria-invalid` and `aria-errormessage`.
+3. Some important WAI ARIA attributes for forms like `aria-invalid` and `aria-errormessage`.
 
 ## Contribution
 
-I made this project to practice my personal skills, thus I don't really prefer that you do any pull requests. However, I'm open to any ideas or feadback. Feel free to do that in the [discussions section](https://github.com/Ahmed-Elbald/Multi-Step-Form-Angular/discussions).
+If you want to make any suggestions, feel free to do that in the [discussions section](https://github.com/Ahmed-Elbald/Multi-Step-Form-Angular/discussions). Also, feel free to clone the repo and play around with the source could.

@@ -21,17 +21,17 @@
 
 ## App features
 
-I've implemented all the features required by the original challenge including, thus the user can:
+I've implemented all the features required by the original challenge, thus the user can:
 
 - Complete each step of the sequence
 - Go back to a previous step to update their selections
-- See a summary of their selections on the final step and confirm their order
+- See a summary of their selections on the final steps and confirm their order
 - Receive form validation messages if:
-   - A field has been missed
-   - The email address is not formatted correctly
+  - A field has been missed
+  - The email address is not formatted correctly
 - See hover and focus states for all interactive elements on the page
 
-In addition, most form sections are build dynamically allowing for other features to be added easily in the future.
+In addition, most form sections are built dynamically allowing for other features to be added easily in the future.
 
 ## Intro
 

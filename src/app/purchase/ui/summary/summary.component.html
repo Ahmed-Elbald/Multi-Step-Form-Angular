@@ -20,7 +20,7 @@
             Included Add-ons
         </dt>
         @for (addOn of summary.addOns; track $index) {
-        <dd class="l-flex-between">
+        <dd class="u-flex-between">
             <span class="u-fs-300">{{addOn.name | capitalize}}</span>
             <form-item-price class="u-text-pr-700 u-fs-300" [value]="addOn.price" [duration]="summary.duration"
                 prefix="+"></form-item-price>
@@ -28,7 +28,7 @@
         }
     </div>
     }
-    <div class="total l-flex-between">
+    <div class="total u-flex-between">
         <dt class="u-fs-300">
             Total (per {{summary.duration.slice(0, -2)}})
         </dt>

@@ -18,8 +18,7 @@
 }
 
 .steps {
-  --clusterSpacer: var(--spacer-500);
-  @include flexCluster();
+  @include flexCluster(var(--spacer-500));
 
   @include min-mq($layoutSwitchBp) {
     flex-direction: column;

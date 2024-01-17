@@ -39,7 +39,6 @@ export class CardDirective implements OnInit {
   constructor(private host: ElementRef) { }
 
   ngOnInit(): void {
-    console.log(this.highlightBg)
     this.renderer.setStyle(this.host.nativeElement, "display", "block");
     this.renderer.setStyle(this.host.nativeElement, "border-radius", "10px");
     this.renderer.setStyle(this.host.nativeElement, "border", `1px solid ${this.borderDefaultClr}`);

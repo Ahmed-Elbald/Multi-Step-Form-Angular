@@ -7,11 +7,6 @@
     --bp-#{$breakpoint}: #{$value};
   }
 
-  /* Border Radius */
-  @each $radius, $value in $border-radius {
-    --radius-#{$radius}: #{$value};
-  }
-
   /* Colors */
   @each $color, $colorVariants in $colors {
     @each $colorVariant, $value in $colorVariants {
@@ -29,11 +24,6 @@
         }
       }
     }
-  }
-
-  /* Box Shadow */
-  @each $shadow, $value in $box-shadow {
-    --shadow-#{$shadow}: #{$value};
   }
 
   /* Spacers */

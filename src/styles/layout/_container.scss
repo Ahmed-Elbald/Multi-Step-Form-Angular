@@ -2,11 +2,11 @@
 
 // Containers
 .l-container {
-  --inlineMargin: var(--spacer-200);
+  --inlineMargin: var(--spacer-400);
   --minWidthStatic: calc(#{map-get($breakpoints, tablet)} + 100px);
   --minWidthPercent: 90%;
   --diffInPixels: 150px;
-  --diffInPercnet: 10%;
+  --diffInPercent: 10%;
 
   width: calc(100% - calc(var(--inlineMargin) * 2));
   margin-inline: var(--inlineMargin);

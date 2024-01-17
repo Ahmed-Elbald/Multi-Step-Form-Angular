@@ -1,13 +1,12 @@
 @use "abstracts" as *;
 
 .plans {
-  --gridSpacer: var(--spacer-400);
-  @include gridSpacer();
+  @include gridSpacer(var(--spacer-400));
   margin-bottom: var(--spacer-500);
 
   @include min-mq($layoutSwitchBp) {
     grid-template-columns: repeat(3, 1fr);
-    column-gap: var(--gridSpacer);
+    column-gap: var(--spacer-400);
   }
 
   .label {
@@ -15,6 +14,7 @@
     grid-template-columns: auto 1fr;
     gap: var(--spacer-500);
     padding: var(--spacer-500);
+    padding-inline-end: var(--spacer-700);
     cursor: pointer;
 
     @include min-mq($layoutSwitchBp) {
@@ -28,12 +28,15 @@
 
     &__media {
       justify-self: flex-start;
-      height: 50px;
+      img {
+        width: 50px;
+      }
     }
 
     &__content {
       span {
         display: block;
+        width: max-content;
       }
 
       span:last-child {

@@ -15,6 +15,7 @@
     gap: var(--spacer-500);
     padding: var(--spacer-500);
     padding-inline-end: var(--spacer-700);
+    border-radius: 10px;
     cursor: pointer;
 
     @include min-mq($layoutSwitchBp) {

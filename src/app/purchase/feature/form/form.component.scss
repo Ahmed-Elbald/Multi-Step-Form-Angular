@@ -24,7 +24,8 @@
 
   form {
     display: block;
-    width: var(--width);
+    width: 100%;
+    max-width: var(--width);
     min-height: 475px;
     margin-inline: auto;
     padding: calc(var(--spacer-700) * 1.125);

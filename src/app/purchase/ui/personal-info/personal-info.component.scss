@@ -28,6 +28,10 @@ div {
   &:focus-visible {
     --outlineClr: var(--clr-acc-500);
     box-shadow: 0 0 7.5px inset hsl(var(--outlineClr) / 0.25);
+
+    @include max-mq(mobile) {
+      font-size: var(--fs-300);
+    }
   }
 
   &::placeholder {

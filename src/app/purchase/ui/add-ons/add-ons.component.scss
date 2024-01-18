@@ -51,6 +51,7 @@ span {
     align-items: center;
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr 1fr;
+    gap: var(--spacer-400);
 
     > div:last-child {
       grid-column: 2;

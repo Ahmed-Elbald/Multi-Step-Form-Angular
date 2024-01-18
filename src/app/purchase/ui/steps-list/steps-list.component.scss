@@ -27,7 +27,7 @@
 
   .step {
     &__link {
-      --focusOutlineClr: hsl(var(--clr-neu-100));
+      --outlineClr: hsl(var(--clr-neu-100));
       outline-offset: 2px;
       @include min-mq($layoutSwitchBp) {
         display: flex;
